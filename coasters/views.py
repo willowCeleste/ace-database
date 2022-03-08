@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from django.core.paginator import Paginator
 from datetime import date, timedelta
 from django.utils import timezone
-from .models import Coaster
+from .models import Coaster, Park
 
 # Home Page
 def home(request):
@@ -33,6 +33,14 @@ def coasters(request):
     pages = [x for x in range(page_int - 5, page_int + 6)]
 
   return render(request, 'coasters/coasters.html', { 'coasters': paginator.get_page(page), 'pages': pages })
+
+def coasters_sync(request):
+  print('coasters sync')
+  parks = Coaster.objects.values('park_string')
+  for park in parks:
+    print(park['park_string'])
+    obj, created = Park.objects.get_or_create(title=park['park_string'], created_date=timezone.now())
+  return render(request, 'coasters/coasters.html', { 'message': 'Synced Coasters with Parks'})
 
 # Coaster Detail
 def coaster(request, id):

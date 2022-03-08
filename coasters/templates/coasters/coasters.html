@@ -26,6 +26,9 @@
         {% endfor %}
       </tbody>
     </table>
+    <form action="/coasters-sync">
+      <button class="btn btn-primary" type="submit">Sync Coasters + Parks</button>
+    </form>
     {% if coasters.has_other_pages %}
       <ul class="pagination">
           <li class="page-item disabled"><a class="page-link" href="?page={% if coasters.previous_page_number >= 1 %}{{ coasters.previous_page_number}}{% endif %}">Previous</a></li>

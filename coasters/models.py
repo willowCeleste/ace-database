@@ -6,6 +6,9 @@ class Park(models.Model):
   title = models.CharField(max_length=200)
   created_date = models.DateTimeField(default=timezone.now)
 
+  class Meta:
+    ordering = ['title']
+
   def __str__(self):
     return self.title
 
@@ -15,6 +18,9 @@ class Coaster(models.Model):
   date_opened = models.DateField(null=True)
   incomplete_date_opened = models.CharField(max_length=200, null=True)
   park_string = models.CharField(max_length=200, null=True)
+
+  class Meta:
+    ordering = ['title']
 
   def __str__(self):
     return self.title
