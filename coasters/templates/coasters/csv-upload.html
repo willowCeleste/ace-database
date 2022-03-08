@@ -1,0 +1,15 @@
+{% extends "coasters/base.html" %}
+
+{% block content %}
+  <div class="container">
+    <form action="/csv-upload" method="POST">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="csv">CSV</label>
+        <input type="file" class="form-control" id="csv" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+    <p>{{ upload_succeeded }}</p>
+  </div>
+{% endblock %}

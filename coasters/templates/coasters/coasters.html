@@ -1,0 +1,41 @@
+{% extends "coasters/base.html" %}
+{% block title %}Coasters{% endblock %}
+{% block content %}
+  <div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Park</th>
+          <th scope="col">Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for coaster in coasters %}
+          <tr{% if not coaster.date_opened %} class="table-warning"{% endif %}>
+            <td>{{ coaster.title }}</td>
+            <td>{{ coaster.park_string }}</td>
+            <td>
+              {% if coaster.date_opened %}
+                {{ coaster.date_opened }}
+              {% else %}
+                {{ coaster.incomplete_date_opened }}
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% if coasters.has_other_pages %}
+      <ul class="pagination">
+          <li class="page-item disabled"><a class="page-link" href="?page={% if coasters.previous_page_number >= 1 %}{{ coasters.previous_page_number}}{% endif %}">Previous</a></li>
+        {% for index in pages %}
+          <li class="page-item{% if coasters.number == index %} active{% endif %}"><a class="page-link" href="?page={{ index }}">{{ index }}</a></li>
+        {% endfor %}
+        {% if coasters.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ coasters.next_page_number }}">Next</a></li>
+        {% endif %}
+      </ul>
+    {% endif %}
+  </div>
+{% endblock %}
