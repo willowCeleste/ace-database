@@ -31,7 +31,7 @@
     </form>
     {% if coasters.has_other_pages %}
       <ul class="pagination">
-          <li class="page-item{% if coasters.has_previous %} disabled{% endif %}"><a class="page-link" href="?page={% if coasters.previous_page_number >= 1 %}{{ coasters.previous_page_number}}{% endif %}">Previous</a></li>
+          <li class="page-item{% if not coasters.has_previous %} disabled{% endif %}"><a class="page-link" href="?page={% if coasters.previous_page_number >= 1 %}{{ coasters.previous_page_number}}{% endif %}">Previous</a></li>
         {% for index in pages %}
           <li class="page-item{% if coasters.number == index %} active{% endif %}"><a class="page-link" href="?page={{ index }}">{{ index }}</a></li>
         {% endfor %}
